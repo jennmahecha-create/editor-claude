@@ -78,7 +78,7 @@ Después: «cierra Claude y vuelve a abrirlo» para que los vea. Si winget no ex
 Vuelve a ejecutar el paso 1. Repite hasta que todo esté ✅. Si algo sigue fallando, mira «Errores típicos».
 
 ## Paso 3 · Crear la carpeta «Mis videos»
-Pregunta (AskUserQuestion) el nombre de su marca o de su cuenta, y dónde crear la carpeta (recomienda Documentos). Luego:
+Pregunta (AskUserQuestion) el nombre de su marca o de su cuenta. **Dónde:** si la carpeta abierta en esta sesión se llama «Mis videos» o está vacía, créala ahí mismo sin preguntar (es lo que pide el workshop). Si no, pregunta dónde (recomienda Documentos › Mis videos). Luego:
 ```bash
 python3 "{SKILL}/scripts/crear_carpetas.py" --dest "<Documentos>/Mis videos" --marca "<nombre>"
 ```

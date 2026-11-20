@@ -11,6 +11,7 @@ REGLAS = """# Mis videos · {marca}
 Reglas para Claude cuando edite en esta carpeta (mandan sobre las de cualquier skill):
 - `00_PACK_DE_MARCA/` es el estilo de la marca: logos/, tipografias/, referencias/, colores.txt, diccionario.txt y Reglas-de-estilo.md (si existe, úsalo siempre).
 - Cada video es una carpeta `NNN_TEMA/` (001, 002…). Si no existe, copia `000_PLANTILLA/` con el siguiente número.
+- **Video nuevo, sin complicaciones:** si la persona deja un video suelto en esta carpeta (o dice dónde está: Escritorio, Descargas…) y pide editarlo, crea tú la siguiente carpeta `NNN_TEMA/` desde la plantilla (el tema, en mayúsculas, sale de lo que dice el video o de lo que ella diga) y **mueve** el video a `01_CLIPS_ORIGINALES/`. Dile en una línea dónde quedó.
   - 01_CLIPS_ORIGINALES: lo grabado (nunca se modifica)
   - 02_REEL_REFERENCIA: videos de referencia + que-copiar.txt → copia SOLO eso
   - 03_REEL_EDITADO_FINAL: el video terminado
