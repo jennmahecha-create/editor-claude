@@ -81,7 +81,8 @@ def main():
     ff = which("ffmpeg")
     add("FFmpeg", ff, run([ff, "-version"])[:60] if ff else "no instalado")
     fp = which("ffprobe")
-    add("ffprobe", fp, fp or "no instalado")
+    fv = run([fp, "-version"]) if fp else ""
+    add("ffprobe 5+", fp and ver(fv.replace("ffprobe version ", "")) >= (5, 0), fv[:40] if fp else "no instalado")
     nd = which("node")
     nv = run([nd, "--version"]) if nd else ""
     add("Node.js 20+", nd and ver(nv) >= (20, 0), nv or "no instalado")

@@ -21,7 +21,13 @@ Reglas para Claude cuando edite en esta carpeta (mandan sobre las de cualquier s
   - 07_SOLO_CORTES: versión solo con cortes, sin subtítulos, gráficos ni música
   - _TRABAJO: intermedios; se puede borrar tras publicar
 - `00_PACK_DE_MARCA/estilos/<nombre>/` guarda fichas de estilo reutilizables: `referencias/` (3 videos parecidos) y `ficha.md`. Para crear una, descarga los videos, analízalos y escribe con valores medibles el ritmo, la animación de los textos, las tipografías, las posiciones, los colores, los zooms, las transiciones, el sonido y la estructura; copia la forma, nunca el contenido. Para usarla («edita el 003 con el estilo X»), toma de la ficha el movimiento y el ritmo, y del Pack de marca los colores, el logo y las letras.
-- Usa las palabras de diccionario.txt al hacer subtítulos.
+- **Receta de edición** (herramientas: plugins Efectos y Tipografía de Converzzo). Para «edita mi video nuevo»:
+  1. /cortar-silencios en todo el video (umbral 0,45 s; si dice «corta», borra la toma anterior) y /limpiar-voz.
+  2. Subtítulos con el estilo de la guía (si no hay guía: sub-clasico), con `correcciones` tomadas de diccionario.txt. Revisa la transcripción y pregunta por nombres dudosos.
+  3. Si hay ficha de estilo o formato: tradúcela a capas de Converzzo (zooms, transiciones, gráficos, sub-estilo) y muestra el plan en una tabla antes de renderizar.
+  4. Si existe 00_PACK_DE_MARCA/Reglas-de-estilo.md con fuentes y colores, guárdalos también con /mi-estilo de Tipografía.
+  5. Fotos de control → «dale» → render. En un computador normal, cuenta unos 2 a 4 minutos por cada 10 segundos de video y avisa el tiempo estimado.
+- Usa las palabras de diccionario.txt al hacer subtítulos (campo `correcciones`).
 - Antes de entregar, haz siempre la revisión de calidad: palabras cortadas, ortografía, zona segura, cara libre, volumen (−14 LUFS), inicio y final limpios, CTA legible. Corrige lo que falle y di en una línea qué revisaste.
 - Si existe Google Drive para escritorio, copia 06_BROLLS y 07_SOLO_CORTES a «Mi unidad/EDICION/{marca}/NNN_TEMA/».
 - Antes del video final, muestra 2 fotos de cómo va a quedar y espera un «dale». No inventes precios, cifras ni nombres: si faltan, pregunta. Si pide varios efectos en un mensaje, hazlos en un solo render.
@@ -29,7 +35,7 @@ Reglas para Claude cuando edite en esta carpeta (mandan sobre las de cualquier s
 - No repitas preguntas: guarda en 00_PACK_DE_MARCA/respuestas.md lo que la persona conteste (calidad, estilo, música, red…) y úsalo la próxima vez sin preguntar. Pregunta solo lo imprescindible. Si la conversación viene de Telegram, pregunta por Telegram con opciones numeradas.
 - Texto detrás de la cabeza: solo cuando la persona lo pida para una ocasión especial (tarda mucho).
 - Biblioteca stock: 3 bibliotecas (videos, imagenes, sonidos), cada una con su `indice.tsv`. Para buscar, lee primero el índice correcto (texto); no abras videos ni escuches audios para buscar. Usa audios e imágenes de bancos solo si su fila dice uso_comercial: sí (y publicidad: sí si se va a pautar). meta-sound-collection solo para Facebook e Instagram. Si hay archivos nuevos, ejecuta `indexar_biblioteca.py --dir <carpeta>` de la skill EditorPRO, mira cada hoja de `.hojas/` una sola vez y escribe descripción y etiquetas en el índice. Canva es para diseñar, no para buscar videos.
-- Música sin problemas: nunca canciones comerciales ni música descargada de redes. Solo música generada, o de _BIBLIOTECA_STOCK/sonidos con su archivo .licencia.txt (uso comercial y publicidad: sí), o sin música. Entrega siempre dos versiones: con música segura y «(sin musica)», para poner un audio en tendencia dentro de la red.
+- Música sin problemas: por defecto SIN música. Nunca canciones comerciales ni música descargada de redes. Si la persona quiere música, usa solo audios de _BIBLIOTECA_STOCK/sonidos con su archivo .licencia.txt (uso comercial: sí; publicidad: sí si se va a pautar) con /musica. Entrega siempre dos versiones: con música segura y «(sin musica)», para poner un audio en tendencia dentro de la red.
 - Habla en español sencillo, sin jerga, y pide permiso antes de instalar algo o de crear o exportar en Canva.
 """
 

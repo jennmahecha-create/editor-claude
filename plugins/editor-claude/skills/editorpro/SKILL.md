@@ -54,13 +54,14 @@ mkdir -p ~/.local/bin ~/.local/node
 V=$(curl -fsSL https://nodejs.org/dist/index.json | python3 -c "import json,sys;print([r['version'] for r in json.load(sys.stdin) if r['lts']][0])")
 curl -fsSL https://nodejs.org/dist/$V/node-$V-darwin-x64.tar.gz | tar -xz -C ~/.local/node --strip-components=1
 export PATH="$HOME/.local/node/bin:$HOME/.local/bin:$PATH"
-# FFmpeg y ffprobe (binarios estáticos vía npm)
-npm i --prefix ~/.local/ffm ffmpeg-static ffprobe-static
-ln -sf ~/.local/ffm/node_modules/ffmpeg-static/ffmpeg ~/.local/bin/ffmpeg
-ln -sf ~/.local/ffm/node_modules/ffprobe-static/bin/darwin/x64/ffprobe ~/.local/bin/ffprobe
 # Python moderno (uv) en un entorno propio
 curl -LsSf https://astral.sh/uv/install.sh | env UV_NO_MODIFY_PATH=1 sh
 uv venv --python 3.11 ~/.local/video-venv && ln -sf ~/.local/video-venv/bin/python ~/.local/bin/python
+# FFmpeg y ffprobe modernos (versión 7 u 8; los motores de efectos NO funcionan con ffprobe 4)
+uv pip install --python ~/.local/video-venv/bin/python static-ffmpeg
+~/.local/video-venv/bin/python -c "import static_ffmpeg.run as r; print(*r.get_or_fetch_platform_executables_else_raise())"
+mkdir -p ~/.local/ffmpeg && cp ~/.local/video-venv/lib/python3.11/site-packages/static_ffmpeg/bin/darwin/{ffmpeg,ffprobe} ~/.local/ffmpeg/
+ln -sf ~/.local/ffmpeg/ffmpeg ~/.local/bin/ffmpeg && ln -sf ~/.local/ffmpeg/ffprobe ~/.local/bin/ffprobe
 # Dejar el PATH para siempre
 grep -q '.local/node/bin' ~/.zshrc 2>/dev/null || echo 'export PATH="$HOME/.local/node/bin:$HOME/.local/bin:$PATH"' >> ~/.zshrc
 ```
@@ -102,7 +103,7 @@ Luego: videos e imágenes → mira cada hoja de `.hojas/` **una sola vez**; audi
 **Biblioteca de sonidos de Meta:** Claude no puede descargarla (requiere la sesión de Facebook de la persona). La persona entra a facebook.com/sound/collection, descarga los audios y los pone en `sonidos/meta-sound-collection/` con su `.licencia.txt` («Fuente: Meta Sound Collection · Uso comercial: sí · Publicidad: sí · Solo Facebook e Instagram»). Para buscar después, lee solo `indice.tsv`.
 
 ## Paso 3c · Primer uso de los efectos Converzzo
-La primera vez que use un comando de Converzzo, el plugin prepara su motor (1 a 3 minutos). Si falla al bajar Chrome o el modelo de voz, usa el Chrome ya instalado y revisa la sección «Si algo falla» del README del plugin. Si el seguimiento de objetos (/etiqueta-sigue, /foco, /lupa, /pixelar) no se pudo instalar, avísale antes de usarlos.
+La primera vez que use un comando de Converzzo, el plugin prepara su motor (en un Mac Intel tarda unos 3 a 4 minutos por plugin). Para que el alumno no espere en su primera edición, al final de EditorPRO ofrécele dejarlos listos: ejecuta el `preparar.sh` de cada plugin si encuentras su carpeta, o pídele que escriba `/cortar-silencios` una vez sin video. Si falla al bajar Chrome o el modelo de voz, usa el Chrome ya instalado y revisa la sección «Si algo falla» del README del plugin. Si el seguimiento de objetos (/etiqueta-sigue, /foco, /lupa, /pixelar) no se pudo instalar, avísale antes de usarlos.
 
 ## Paso 3d · Telegram en modo Terminal (Nivel 5, cuando lo pida)
 La app de escritorio envía mensajes por Telegram pero NO entrega a la conversación los que la persona escribe. Para recibirlos, Claude se abre en modo canal desde la Terminal:
@@ -123,7 +124,8 @@ La app de escritorio envía mensajes por Telegram pero NO entrega a la conversac
 |---|---|
 | «Homebrew on macOS is only supported on Apple Silicon» | Es un Mac Intel: usa la ruta Mac Intel. |
 | `command not found` justo después de instalar | `export PATH=...` en esta sesión; para Claude: cerrar y abrir la app. |
-| `curl: (56) ... 410` al bajar FFmpeg | Ese sitio cambió: usa la ruta de npm (`ffmpeg-static`). |
+| `curl: (56) ... 410` al bajar FFmpeg | Ese sitio cambió: usa `static-ffmpeg` (pip). |
+| `No match for section 'stream_side_data'` al editar | ffprobe demasiado viejo (versión 4). Instala el moderno con `static-ffmpeg` (ruta Mac Intel). |
 | Error compilando `llvmlite` o `numba` | Fija `numba==0.60.0 llvmlite==0.43.0` (ruedas precompiladas). |
 | `pip` instala en Python 3.9 del sistema | Usa el entorno `~/.local/video-venv` (Mac) o `py -3.12` (Windows). |
 | «No hay espacio» | Menos de 15 GB libres: pídele que libere espacio antes de seguir. |
