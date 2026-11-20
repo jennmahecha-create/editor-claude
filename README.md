@@ -10,9 +10,9 @@ Skills para editar tus videos con Claude, en español sencillo y sin saber de te
 Se actualiza solo cada vez que mejoramos algo.
 
 ## Qué incluye
-- **preparar-mi-equipo**: revisa tu computador, instala con permiso lo que falta (Mac Intel, Mac Apple Silicon o Windows) y crea tu carpeta «Mis videos».
+- **EditorPRO**: revisa tu computador, instala con permiso lo que falta (Mac Intel, Mac Apple Silicon o Windows) y crea tu carpeta «Mis videos».
 
-Escríbele a Claude: **«Prepara mi equipo para editar videos»**.
+En una conversación nueva de Claude (pestaña **Code**), escribe solo: **EditorPRO**
 
 ## En Claude Code
 ```
