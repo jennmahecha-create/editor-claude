@@ -118,5 +118,6 @@ La primera vez que use un comando de Converzzo, el plugin prepara su motor (1 a 
 | «No hay espacio» | Menos de 15 GB libres: pídele que libere espacio antes de seguir. |
 | El instalador pide contraseña y la persona se asusta | Explica que es la misma con la que enciende el computador y que no se verán las letras. |
 | Windows: `winget` no reconocido | Instalar «Instalador de aplicaciones» desde Microsoft Store. |
-| Telegram no arranca: «Executable not found: bun» | Instala Bun (herramientas opcionales) y cierra y abre Claude. |
+| Telegram no arranca: «Executable not found: bun» | Si Bun no está, instálalo. Si ya está (en ~/.bun/bin), la app no lo ve: pide a la persona que ejecute en la Terminal `sudo ln -sf ~/.bun/bin/bun /usr/local/bin/bun` (pide su contraseña del Mac) y que cierre (Cmd + Q) y abra Claude. |
+| El bot de Telegram no responde | Solo una conversación a la vez recibe Telegram. Cerrar la app con Cmd + Q, abrirla y dejar solo la conversación de su carpeta de videos. |
 | Un comando se borra por la seguridad de Claude | No lo fuerces: busca otra forma sin borrar, o pide a la persona que lo haga. |
