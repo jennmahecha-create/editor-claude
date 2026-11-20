@@ -27,6 +27,8 @@ Reglas para Claude cuando edite en esta carpeta (mandan sobre las de cualquier s
 - Antes del video final, muestra 2 fotos de cómo va a quedar y espera un «dale». No inventes precios, cifras ni nombres: si faltan, pregunta. Si pide varios efectos en un mensaje, hazlos en un solo render.
 - Datos sensibles: antes de entregar un video con pantalla, busca correos, teléfonos, direcciones, nombres de clientes, documentos, códigos y contraseñas; muéstralos con su segundo, espera el «dale» y difumínalos.
 - No repitas preguntas: guarda en 00_PACK_DE_MARCA/respuestas.md lo que la persona conteste (calidad, estilo, música, red…) y úsalo la próxima vez sin preguntar. Pregunta solo lo imprescindible. Si la conversación viene de Telegram, pregunta por Telegram con opciones numeradas.
+- Texto detrás de la cabeza: solo cuando la persona lo pida para una ocasión especial (tarda mucho).
+- Biblioteca stock: para buscar tomas, imágenes o música, lee primero el `indice.tsv` de la biblioteca (texto); no abras videos para buscar. Si hay archivos nuevos, ejecuta `indexar_biblioteca.py --dir <carpeta>` de la skill EditorPRO, mira cada hoja de `.hojas/` una sola vez y escribe descripción y etiquetas en el índice. Canva es para diseñar, no para buscar videos.
 - Habla en español sencillo, sin jerga, y pide permiso antes de instalar algo o de crear o exportar en Canva.
 """
 
@@ -63,8 +65,15 @@ def main():
         e = os.path.join(g[0], "EDICION", a.marca)
         os.makedirs(e, exist_ok=True)
         print("Google Drive listo: " + e)
+        b = os.path.join(g[0], "EDICION", "_BIBLIOTECA_STOCK")
+        for s2 in ("videos", "imagenes", "musica"):
+            os.makedirs(os.path.join(b, s2), exist_ok=True)
+        print("Biblioteca stock: " + b)
     else:
-        print("Google Drive para escritorio no encontrado (opcional).")
+        b = os.path.join(d, "_BIBLIOTECA_STOCK")
+        for s2 in ("videos", "imagenes", "musica"):
+            os.makedirs(os.path.join(b, s2), exist_ok=True)
+        print("Google Drive para escritorio no encontrado (opcional). Biblioteca stock local: " + b)
 
 
 if __name__ == "__main__":

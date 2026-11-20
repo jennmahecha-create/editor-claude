@@ -95,6 +95,12 @@ def main():
         add("Homebrew", which("brew"), which("brew") or ("no disponible en Mac Intel" if so == "mac-intel" else "no instalado"), necesario=False)
     if so == "windows":
         add("winget", which("winget"), which("winget") or "no instalado", necesario=False)
+    yd = which("yt-dlp")
+    add("yt-dlp (descargar referencias)", yd, run([yd, "--version"]) if yd else "no instalado (opcional, Nivel 2 y 6)", necesario=False)
+    gl = which("gallery-dl")
+    add("gallery-dl (Pinterest/Instagram)", gl, run([gl, "--version"]) if gl else "no instalado (opcional, Nivel 2)", necesario=False)
+    bn = which("bun")
+    add("Bun (Telegram)", bn, run([bn, "--version"]) if bn else "no instalado (opcional, Nivel 5)", necesario=False)
     gd = drive()
     add("Google Drive para escritorio", gd, gd or "no instalado (opcional, Nivel 3)", necesario=False)
 

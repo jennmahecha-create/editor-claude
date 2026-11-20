@@ -75,6 +75,10 @@ winget install -e --id Google.Chrome
 ```
 Después: «cierra Claude y vuelve a abrirlo» para que los vea. Si winget no existe, pídele que instale «Instalador de aplicaciones» desde Microsoft Store.
 
+### Herramientas opcionales (instálalas si la persona va a usar ese nivel)
+- **yt-dlp y gallery-dl** (descargar referencias de YouTube, Instagram y Pinterest; Niveles 2 y 6): Mac `uv tool install yt-dlp && uv tool install gallery-dl` (o `python -m pip install --user yt-dlp gallery-dl`); Windows `winget install -e --id yt-dlp.yt-dlp` y `py -m pip install gallery-dl`.
+- **Bun** (lo necesita el plugin de Telegram; Nivel 5): Mac `curl -fsSL https://bun.sh/install | bash`; Windows `powershell -c "irm bun.sh/install.ps1 | iex"`. Después: cerrar y abrir Claude.
+
 ### Al terminar
 Vuelve a ejecutar el paso 1. Repite hasta que todo esté ✅. Si algo sigue fallando, mira «Errores típicos».
 
@@ -86,6 +90,17 @@ python3 "{SKILL}/scripts/crear_carpetas.py" --dest "<Documentos>/Mis videos" --m
 Crea: `00_PACK_DE_MARCA/` (logos, tipografias, referencias, estilos, colores.txt, diccionario.txt), `000_PLANTILLA/` (01_CLIPS_ORIGINALES … 07_SOLO_CORTES, _TRABAJO), un `CLAUDE.md` con las reglas del método y, si hay Google Drive para escritorio, `Mi unidad/EDICION/<marca>/`.
 
 Explícale en 4 líneas qué va en cada carpeta y que **a partir de ahora abra Claude siempre en «Mis videos»**.
+
+## Paso 3b · Biblioteca stock (buscar gastando poco)
+`crear_carpetas.py` también crea `_BIBLIOTECA_STOCK/` (videos, imagenes, musica): en Google Drive › EDICION si existe, o dentro de Mis videos. Explícale: «aquí guardas tomas, fotos y música para reutilizar; yo busco en una lista de texto, así casi no gasto».
+Cuando agregue archivos o diga «actualiza mi biblioteca stock»:
+```bash
+python3 "{SKILL}/scripts/indexar_biblioteca.py" --dir "<biblioteca>"
+```
+Luego mira cada hoja de `.hojas/` **una sola vez** y escribe en `indice.tsv` la descripción (1 línea) y 5 etiquetas. Para buscar después, lee solo `indice.tsv`.
+
+## Paso 3c · Primer uso de los efectos Converzzo
+La primera vez que use un comando de Converzzo, el plugin prepara su motor (1 a 3 minutos). Si falla al bajar Chrome o el modelo de voz, usa el Chrome ya instalado y revisa la sección «Si algo falla» del README del plugin. Si el seguimiento de objetos (/etiqueta-sigue, /foco, /lupa, /pixelar) no se pudo instalar, avísale antes de usarlos.
 
 ## Paso 4 · Cierre
 - Muéstrale el ✅ final con lo que quedó instalado y dónde está su carpeta.
@@ -103,4 +118,5 @@ Explícale en 4 líneas qué va en cada carpeta y que **a partir de ahora abra C
 | «No hay espacio» | Menos de 15 GB libres: pídele que libere espacio antes de seguir. |
 | El instalador pide contraseña y la persona se asusta | Explica que es la misma con la que enciende el computador y que no se verán las letras. |
 | Windows: `winget` no reconocido | Instalar «Instalador de aplicaciones» desde Microsoft Store. |
+| Telegram no arranca: «Executable not found: bun» | Instala Bun (herramientas opcionales) y cierra y abre Claude. |
 | Un comando se borra por la seguridad de Claude | No lo fuerces: busca otra forma sin borrar, o pide a la persona que lo haga. |
