@@ -29,6 +29,7 @@ Reglas para Claude cuando edite en esta carpeta (mandan sobre las de cualquier s
 - No repitas preguntas: guarda en 00_PACK_DE_MARCA/respuestas.md lo que la persona conteste (calidad, estilo, música, red…) y úsalo la próxima vez sin preguntar. Pregunta solo lo imprescindible. Si la conversación viene de Telegram, pregunta por Telegram con opciones numeradas.
 - Texto detrás de la cabeza: solo cuando la persona lo pida para una ocasión especial (tarda mucho).
 - Biblioteca stock: para buscar tomas, imágenes o música, lee primero el `indice.tsv` de la biblioteca (texto); no abras videos para buscar. Si hay archivos nuevos, ejecuta `indexar_biblioteca.py --dir <carpeta>` de la skill EditorPRO, mira cada hoja de `.hojas/` una sola vez y escribe descripción y etiquetas en el índice. Canva es para diseñar, no para buscar videos.
+- Música sin problemas: nunca canciones comerciales ni música descargada de redes. Solo música generada, o de _BIBLIOTECA_STOCK/musica con su archivo .licencia.txt (uso comercial y publicidad: sí), o sin música. Entrega siempre dos versiones: con música segura y «(sin musica)», para poner un audio en tendencia dentro de la red.
 - Habla en español sencillo, sin jerga, y pide permiso antes de instalar algo o de crear o exportar en Canva.
 """
 

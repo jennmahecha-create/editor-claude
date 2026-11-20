@@ -7,7 +7,7 @@
       "name": "editor-claude",
       "source": "./plugins/editor-claude",
       "description": "Prepara tu computador y tu carpeta «Mis videos» para editar con Claude.",
-      "version": "0.6.0"
+      "version": "0.7.0"
     }
   ]
 }
