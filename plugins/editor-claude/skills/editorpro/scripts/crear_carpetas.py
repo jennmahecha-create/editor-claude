@@ -28,6 +28,7 @@ Reglas para Claude cuando edite en esta carpeta (mandan sobre las de cualquier s
   4. Si existe 00_PACK_DE_MARCA/Reglas-de-estilo.md con fuentes y colores, guárdalos también con /mi-estilo de Tipografía.
   5. Fotos de control → «dale» → render. En un computador normal, cuenta unos 2 a 4 minutos por cada 10 segundos de video y avisa el tiempo estimado.
 - Usa las palabras de diccionario.txt al hacer subtítulos (campo `correcciones`).
+- Plantillas de tendencia (como las de CapCut): si la persona da el enlace de un reel con canción viral y pide «hazlo como esta plantilla», descárgalo en `00_PACK_DE_MARCA/plantillas/<nombre>/referencia/` y escribe `plantilla.md` con el mapa de tiempos desde el segundo 0 del audio: duración de cada hueco (clip), el segundo exacto de cada corte, efectos, transiciones y textos, y en qué segundo de la canción empieza. Llena los huecos con los clips de la persona (su estilo de marca, sin copiar contenido). Entrega el video SIN la canción y una nota: «al publicar, agrega la canción [nombre] dentro de Instagram o TikTok, empezando en el segundo X». Si la plantilla es para un solo video y existe en CapCut, avisa que en CapCut es más rápido.
 - Antes de entregar, haz siempre la revisión de calidad: palabras cortadas, ortografía, zona segura, cara libre, volumen (−14 LUFS), inicio y final limpios, CTA legible. Corrige lo que falle y di en una línea qué revisaste.
 - Si existe Google Drive para escritorio, copia 06_BROLLS y 07_SOLO_CORTES a «Mi unidad/EDICION/{marca}/NNN_TEMA/».
 - Antes del video final, muestra 2 fotos de cómo va a quedar y espera un «dale». No inventes precios, cifras ni nombres: si faltan, pregunta. Si pide varios efectos en un mensaje, hazlos en un solo render.
@@ -53,7 +54,7 @@ def main():
     a = ap.parse_args()
     d = os.path.abspath(os.path.expanduser(a.dest))
     pack = os.path.join(d, "00_PACK_DE_MARCA")
-    for s in ("logos", "tipografias", "referencias", "estilos"):
+    for s in ("logos", "tipografias", "referencias", "estilos", "plantillas"):
         os.makedirs(os.path.join(pack, s), exist_ok=True)
     nuevo(os.path.join(pack, "colores.txt"),
           "Colores de %s (código, ej. #1E3A8A)\nPrincipal: \nSecundario: \nAcento: \nKit de marca en Canva (sí/no): \n" % a.marca)

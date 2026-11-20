@@ -1,4 +1,4 @@
-# Editor Claude
+# Mi Editor PRO · Edición asistida con IA
 
 Skills para editar tus videos con Claude, en español sencillo y sin saber de tecnología.
 
