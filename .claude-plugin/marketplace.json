@@ -1,0 +1,13 @@
+{
+  "name": "editor-claude",
+  "owner": { "name": "Editor Claude" },
+  "metadata": { "description": "Skills para editar videos con Claude paso a paso, pensadas para personas sin conocimientos técnicos." },
+  "plugins": [
+    {
+      "name": "editor-claude",
+      "source": "./plugins/editor-claude",
+      "description": "Prepara tu computador y tu carpeta «Mis videos» para editar con Claude.",
+      "version": "0.1.0"
+    }
+  ]
+}
