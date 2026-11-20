@@ -25,6 +25,8 @@ Reglas para Claude cuando edite en esta carpeta (mandan sobre las de cualquier s
 - Antes de entregar, haz siempre la revisión de calidad: palabras cortadas, ortografía, zona segura, cara libre, volumen (−14 LUFS), inicio y final limpios, CTA legible. Corrige lo que falle y di en una línea qué revisaste.
 - Si existe Google Drive para escritorio, copia 06_BROLLS y 07_SOLO_CORTES a «Mi unidad/EDICION/{marca}/NNN_TEMA/».
 - Antes del video final, muestra 2 fotos de cómo va a quedar y espera un «dale». No inventes precios, cifras ni nombres: si faltan, pregunta. Si pide varios efectos en un mensaje, hazlos en un solo render.
+- Datos sensibles: antes de entregar un video con pantalla, busca correos, teléfonos, direcciones, nombres de clientes, documentos, códigos y contraseñas; muéstralos con su segundo, espera el «dale» y difumínalos.
+- No repitas preguntas: guarda en 00_PACK_DE_MARCA/respuestas.md lo que la persona conteste (calidad, estilo, música, red…) y úsalo la próxima vez sin preguntar. Pregunta solo lo imprescindible. Si la conversación viene de Telegram, pregunta por Telegram con opciones numeradas.
 - Habla en español sencillo, sin jerga, y pide permiso antes de instalar algo o de crear o exportar en Canva.
 """
 
