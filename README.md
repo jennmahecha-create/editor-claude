@@ -10,7 +10,7 @@ Skills para editar tus videos con Claude, en español sencillo y sin saber de te
 Se actualiza solo cada vez que mejoramos algo.
 
 ## Qué incluye
-- **EditorPRO**: revisa tu computador, instala con permiso lo que falta (Mac Intel, Mac Apple Silicon o Windows) y crea tu carpeta «Mis videos» y tu Biblioteca stock (para encontrar tomas, fotos y música gastando poco).
+- **EditorPRO**: revisa tu computador, instala con permiso lo que falta (Mac Intel, Mac Apple Silicon o Windows) y crea tu carpeta «Mis videos» y tus 3 bibliotecas stock (videos, imágenes y sonidos con licencia), con índice para buscar gastando poco.
 
 En una conversación nueva de Claude (pestaña **Code**), escribe solo: **EditorPRO**
 

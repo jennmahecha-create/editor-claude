@@ -92,12 +92,14 @@ Crea: `00_PACK_DE_MARCA/` (logos, tipografias, referencias, estilos, colores.txt
 Explícale en 4 líneas qué va en cada carpeta y que **a partir de ahora abra Claude siempre en «Mis videos»**.
 
 ## Paso 3b · Biblioteca stock (buscar gastando poco)
-`crear_carpetas.py` también crea `_BIBLIOTECA_STOCK/` (videos, imagenes, musica): en Google Drive › EDICION si existe, o dentro de Mis videos. Explícale: «aquí guardas tomas, fotos y música para reutilizar; yo busco en una lista de texto, así casi no gasto».
-Cuando agregue archivos o diga «actualiza mi biblioteca stock»:
+`crear_carpetas.py` también crea `_BIBLIOTECA_STOCK/` con 3 bibliotecas: `videos/` (y `brolls/`), `imagenes/` y `sonidos/` (`musica/`, `efectos/`, `meta-sound-collection/`): en Google Drive › EDICION si existe, o dentro de Mis videos. Explícale: «aquí guardas tomas, fotos y música para reutilizar; yo busco en una lista de texto, así casi no gasto».
+Cada audio o archivo de banco lleva al lado `<archivo>.licencia.txt` (Fuente, Licencia, Uso comercial, Publicidad); el índice lo lee solo y avisa de los audios sin licencia, que no se usan.
+Cuando agregue archivos o diga «actualiza mi biblioteca stock» (ejecútalo en cada una de las 3):
 ```bash
 python3 "{SKILL}/scripts/indexar_biblioteca.py" --dir "<biblioteca>"
 ```
-Luego mira cada hoja de `.hojas/` **una sola vez** y escribe en `indice.tsv` la descripción (1 línea) y 5 etiquetas. Para buscar después, lee solo `indice.tsv`.
+Luego: videos e imágenes → mira cada hoja de `.hojas/` **una sola vez**; audios → describe por el nombre y la licencia (escucha 10 s solo si hace falta). Escribe en `indice.tsv` la descripción (1 línea) y 5 etiquetas.
+**Biblioteca de sonidos de Meta:** Claude no puede descargarla (requiere la sesión de Facebook de la persona). La persona entra a facebook.com/sound/collection, descarga los audios y los pone en `sonidos/meta-sound-collection/` con su `.licencia.txt` («Fuente: Meta Sound Collection · Uso comercial: sí · Publicidad: sí · Solo Facebook e Instagram»). Para buscar después, lee solo `indice.tsv`.
 
 ## Paso 3c · Primer uso de los efectos Converzzo
 La primera vez que use un comando de Converzzo, el plugin prepara su motor (1 a 3 minutos). Si falla al bajar Chrome o el modelo de voz, usa el Chrome ya instalado y revisa la sección «Si algo falla» del README del plugin. Si el seguimiento de objetos (/etiqueta-sigue, /foco, /lupa, /pixelar) no se pudo instalar, avísale antes de usarlos.

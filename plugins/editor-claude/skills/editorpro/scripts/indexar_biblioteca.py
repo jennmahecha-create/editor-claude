@@ -12,7 +12,8 @@ import argparse, csv, json, os, shutil, subprocess, sys, time
 
 VIDEO = {".mp4", ".mov", ".m4v", ".mkv", ".webm", ".avi"}
 IMAGEN = {".jpg", ".jpeg", ".png", ".webp", ".heic"}
-CAMPOS = ["archivo", "tipo", "duracion_s", "resolucion", "orientacion", "fecha", "descripcion", "etiquetas"]
+AUDIO = {".mp3", ".wav", ".m4a", ".aac", ".ogg", ".flac"}
+CAMPOS = ["archivo", "tipo", "duracion_s", "resolucion", "orientacion", "fecha", "descripcion", "etiquetas", "fuente", "licencia", "uso_comercial", "publicidad"]
 
 
 def herramienta(n):
@@ -48,6 +49,23 @@ def hoja(ffmpeg, f, dur, salida):
     subprocess.run(cmd, capture_output=True)
 
 
+def licencia(ruta):
+    """Lee <archivo>.licencia.txt si existe (Fuente:, Licencia:, Uso comercial:, Publicidad:)."""
+    d = {"fuente": "", "licencia": "", "uso_comercial": "", "publicidad": ""}
+    for cand in (ruta + ".licencia.txt", os.path.splitext(ruta)[0] + ".licencia.txt"):
+        if os.path.exists(cand):
+            for l in open(cand, encoding="utf-8", errors="ignore"):
+                k, _, v = l.partition(":")
+                k = k.strip().lower()
+                v = v.strip()
+                if k.startswith("fuente"): d["fuente"] = v
+                elif k.startswith("licencia"): d["licencia"] = v
+                elif k.startswith("uso comercial"): d["uso_comercial"] = v
+                elif k.startswith("publicidad"): d["publicidad"] = v
+            break
+    return d
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dir", required=True)
@@ -71,19 +89,25 @@ def main():
         dirs[:] = [d for d in dirs if not d.startswith(".")]
         for n in sorted(archivos):
             ext = os.path.splitext(n)[1].lower()
-            if ext not in VIDEO | IMAGEN:
+            if ext not in VIDEO | IMAGEN | AUDIO:
                 continue
             ruta = os.path.join(raiz, n)
             rel = os.path.relpath(ruta, base)
             if rel in filas:
+                filas[rel].update({k: v for k, v in licencia(ruta).items() if v})
                 continue
-            dur, w, h = probe(ffprobe, ruta) if ext in VIDEO else (0.0, *probe(ffprobe, ruta)[1:])
-            ori = "vertical" if h > w else ("horizontal" if w > h else "cuadrado")
-            hoja(ffmpeg, ruta, dur if ext in VIDEO else 0, os.path.join(base, ".hojas", rel + ".jpg"))
-            filas[rel] = {"archivo": rel, "tipo": "video" if ext in VIDEO else "imagen",
+            if ext in AUDIO:
+                dur = probe(ffprobe, ruta)[0]; w = h = 0; ori = "-"
+                tipo = "audio"
+            else:
+                dur, w, h = probe(ffprobe, ruta) if ext in VIDEO else (0.0, *probe(ffprobe, ruta)[1:])
+                ori = "vertical" if h > w else ("horizontal" if w > h else "cuadrado")
+                hoja(ffmpeg, ruta, dur if ext in VIDEO else 0, os.path.join(base, ".hojas", rel + ".jpg"))
+                tipo = "video" if ext in VIDEO else "imagen"
+            filas[rel] = {"archivo": rel, "tipo": tipo,
                           "duracion_s": "%.1f" % dur, "resolucion": "%dx%d" % (w, h), "orientacion": ori,
                           "fecha": time.strftime("%Y-%m-%d", time.localtime(os.path.getmtime(ruta))),
-                          "descripcion": "", "etiquetas": ""}
+                          "descripcion": "", "etiquetas": "", **licencia(ruta)}
             nuevos += 1
     with open(idx, "w", encoding="utf-8", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=CAMPOS, delimiter="\t")
@@ -93,7 +117,10 @@ def main():
     falta = sum(1 for r in filas.values() if not r.get("descripcion"))
     print("Índice: %s · %d archivos · %d nuevos · %d sin describir" % (idx, len(filas), nuevos, falta))
     if falta:
-        print("Siguiente: mira cada hoja en .hojas/ UNA vez y escribe descripcion y etiquetas en indice.tsv.")
+        print("Siguiente: videos e imágenes → mira cada hoja de .hojas/ UNA vez; audios → describe por nombre, licencia y, si hace falta, escuchando solo 10 s. Escribe descripcion y etiquetas en indice.tsv.")
+    sin_lic = [r["archivo"] for r in filas.values() if r.get("tipo") == "audio" and not r.get("licencia")]
+    if sin_lic:
+        print("⚠️ Audios SIN licencia (no se usan hasta tener su .licencia.txt): " + ", ".join(sin_lic))
 
 
 if __name__ == "__main__":

@@ -28,8 +28,8 @@ Reglas para Claude cuando edite en esta carpeta (mandan sobre las de cualquier s
 - Datos sensibles: antes de entregar un video con pantalla, busca correos, teléfonos, direcciones, nombres de clientes, documentos, códigos y contraseñas; muéstralos con su segundo, espera el «dale» y difumínalos.
 - No repitas preguntas: guarda en 00_PACK_DE_MARCA/respuestas.md lo que la persona conteste (calidad, estilo, música, red…) y úsalo la próxima vez sin preguntar. Pregunta solo lo imprescindible. Si la conversación viene de Telegram, pregunta por Telegram con opciones numeradas.
 - Texto detrás de la cabeza: solo cuando la persona lo pida para una ocasión especial (tarda mucho).
-- Biblioteca stock: para buscar tomas, imágenes o música, lee primero el `indice.tsv` de la biblioteca (texto); no abras videos para buscar. Si hay archivos nuevos, ejecuta `indexar_biblioteca.py --dir <carpeta>` de la skill EditorPRO, mira cada hoja de `.hojas/` una sola vez y escribe descripción y etiquetas en el índice. Canva es para diseñar, no para buscar videos.
-- Música sin problemas: nunca canciones comerciales ni música descargada de redes. Solo música generada, o de _BIBLIOTECA_STOCK/musica con su archivo .licencia.txt (uso comercial y publicidad: sí), o sin música. Entrega siempre dos versiones: con música segura y «(sin musica)», para poner un audio en tendencia dentro de la red.
+- Biblioteca stock: 3 bibliotecas (videos, imagenes, sonidos), cada una con su `indice.tsv`. Para buscar, lee primero el índice correcto (texto); no abras videos ni escuches audios para buscar. Usa audios e imágenes de bancos solo si su fila dice uso_comercial: sí (y publicidad: sí si se va a pautar). meta-sound-collection solo para Facebook e Instagram. Si hay archivos nuevos, ejecuta `indexar_biblioteca.py --dir <carpeta>` de la skill EditorPRO, mira cada hoja de `.hojas/` una sola vez y escribe descripción y etiquetas en el índice. Canva es para diseñar, no para buscar videos.
+- Música sin problemas: nunca canciones comerciales ni música descargada de redes. Solo música generada, o de _BIBLIOTECA_STOCK/sonidos con su archivo .licencia.txt (uso comercial y publicidad: sí), o sin música. Entrega siempre dos versiones: con música segura y «(sin musica)», para poner un audio en tendencia dentro de la red.
 - Habla en español sencillo, sin jerga, y pide permiso antes de instalar algo o de crear o exportar en Canva.
 """
 
@@ -67,12 +67,12 @@ def main():
         os.makedirs(e, exist_ok=True)
         print("Google Drive listo: " + e)
         b = os.path.join(g[0], "EDICION", "_BIBLIOTECA_STOCK")
-        for s2 in ("videos", "imagenes", "musica"):
+        for s2 in ("videos/brolls", "imagenes", "sonidos/musica", "sonidos/efectos", "sonidos/meta-sound-collection"):
             os.makedirs(os.path.join(b, s2), exist_ok=True)
         print("Biblioteca stock: " + b)
     else:
         b = os.path.join(d, "_BIBLIOTECA_STOCK")
-        for s2 in ("videos", "imagenes", "musica"):
+        for s2 in ("videos/brolls", "imagenes", "sonidos/musica", "sonidos/efectos", "sonidos/meta-sound-collection"):
             os.makedirs(os.path.join(b, s2), exist_ok=True)
         print("Google Drive para escritorio no encontrado (opcional). Biblioteca stock local: " + b)
 
