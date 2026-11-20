@@ -102,6 +102,15 @@ Luego mira cada hoja de `.hojas/` **una sola vez** y escribe en `indice.tsv` la 
 ## Paso 3c · Primer uso de los efectos Converzzo
 La primera vez que use un comando de Converzzo, el plugin prepara su motor (1 a 3 minutos). Si falla al bajar Chrome o el modelo de voz, usa el Chrome ya instalado y revisa la sección «Si algo falla» del README del plugin. Si el seguimiento de objetos (/etiqueta-sigue, /foco, /lupa, /pixelar) no se pudo instalar, avísale antes de usarlos.
 
+## Paso 3d · Telegram en modo Terminal (Nivel 5, cuando lo pida)
+La app de escritorio envía mensajes por Telegram pero NO entrega a la conversación los que la persona escribe. Para recibirlos, Claude se abre en modo canal desde la Terminal:
+1. Instalar Claude Code para Terminal (pide permiso): Mac `curl -fsSL https://claude.ai/install.sh | bash`; Windows `irm https://claude.ai/install.ps1 | iex`.
+2. `claude plugin marketplace add anthropics/claude-plugins-official` y `claude plugin install telegram@claude-plugins-official`.
+3. Bun accesible para la app: si `bun` está en ~/.bun/bin, que la persona ejecute `sudo ln -sf ~/.bun/bin/bun /usr/local/bin/bun`.
+4. Atajo `editor` en ~/.zshrc (Mac): `alias editor='cd "<carpeta de videos>" && env -u ANTHROPIC_BASE_URL -u ANTHROPIC_API_KEY caffeinate -i claude --channels plugin:telegram@claude-plugins-official'`.
+5. Explícale: abrir la app **Terminal** del sistema (no la integrada en Claude), escribir `editor`, y en el primer inicio elegir **cuenta de Claude con suscripción**, nunca «API» (cobra aparte). Antes, cerrar la app de escritorio con Cmd + Q para que no compitan por el bot.
+6. Prueba: escribir «hola» al bot desde el celular → debe responder.
+
 ## Paso 4 · Cierre
 - Muéstrale el ✅ final con lo que quedó instalado y dónde está su carpeta.
 - Dile el siguiente paso del workshop: «Ahora mete tu primer video en 000_PLANTILLA… o pídeme: crea el video 001».
@@ -119,5 +128,6 @@ La primera vez que use un comando de Converzzo, el plugin prepara su motor (1 a 
 | El instalador pide contraseña y la persona se asusta | Explica que es la misma con la que enciende el computador y que no se verán las letras. |
 | Windows: `winget` no reconocido | Instalar «Instalador de aplicaciones» desde Microsoft Store. |
 | Telegram no arranca: «Executable not found: bun» | Si Bun no está, instálalo. Si ya está (en ~/.bun/bin), la app no lo ve: pide a la persona que ejecute en la Terminal `sudo ln -sf ~/.bun/bin/bun /usr/local/bin/bun` (pide su contraseña del Mac) y que cierre (Cmd + Q) y abra Claude. |
+| El bot muestra «escribiendo…» pero no responde | La app de escritorio no entrega los mensajes entrantes: usar el modo Terminal (Paso 3d). |
 | El bot de Telegram no responde | Solo una conversación a la vez recibe Telegram. Cerrar la app con Cmd + Q, abrirla y dejar solo la conversación de su carpeta de videos. |
 | Un comando se borra por la seguridad de Claude | No lo fuerces: busca otra forma sin borrar, o pide a la persona que lo haga. |
