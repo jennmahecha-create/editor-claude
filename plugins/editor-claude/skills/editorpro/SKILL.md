@@ -102,6 +102,11 @@ python3 "{SKILL}/scripts/indexar_biblioteca.py" --dir "<biblioteca>"
 Luego: videos e imágenes → mira cada hoja de `.hojas/` **una sola vez**; audios → describe por el nombre y la licencia (escucha 10 s solo si hace falta). Escribe en `indice.tsv` la descripción (1 línea) y 5 etiquetas.
 **Biblioteca de sonidos de Meta:** Claude no puede descargarla (requiere la sesión de Facebook de la persona). La persona entra a facebook.com/sound/collection, descarga los audios y los pone en `sonidos/meta-sound-collection/` con su `.licencia.txt` («Fuente: Meta Sound Collection · Uso comercial: sí · Publicidad: sí · Solo Facebook e Instagram»). Para buscar después, lee solo `indice.tsv`.
 
+## Paso 3b2 · Stock gratis (Pixabay y Pexels, cuando lo pida)
+1. Crea `~/.config/editorpro/claves.env` con `PIXABAY_KEY=` y `PEXELS_KEY=` vacíos (permisos 600) y ábrelo para que la persona pegue su clave ella misma (`open -e` en Mac, `notepad` en Windows). Nunca le pidas la clave en el chat.
+2. Explícale cómo sacarla: cuenta gratis en pixabay.com → pixabay.com/api/docs/ (la clave aparece con la sesión iniciada); en Pexels: pexels.com/api.
+3. Prueba con `python3 "{SKILL}/scripts/stock_gratis.py" buscar --tipo video --q "manos" --n 3`.
+
 ## Paso 3c · Primer uso de los efectos Converzzo
 La primera vez que use un comando de Converzzo, el plugin prepara su motor (en un Mac Intel tarda unos 3 a 4 minutos por plugin). Para que el alumno no espere en su primera edición, al final de EditorPRO ofrécele dejarlos listos: ejecuta el `preparar.sh` de cada plugin si encuentras su carpeta, o pídele que escriba `/cortar-silencios` una vez sin video. Si falla al bajar Chrome o el modelo de voz, usa el Chrome ya instalado y revisa la sección «Si algo falla» del README del plugin. Si el seguimiento de objetos (/etiqueta-sigue, /foco, /lupa, /pixelar) no se pudo instalar, avísale antes de usarlos.
 
