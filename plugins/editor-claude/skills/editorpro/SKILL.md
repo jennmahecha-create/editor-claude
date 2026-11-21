@@ -73,7 +73,9 @@ winget install -e --id Gyan.FFmpeg
 winget install -e --id OpenJS.NodeJS.LTS
 winget install -e --id Python.Python.3.12
 winget install -e --id Google.Chrome
+winget install -e --id Git.Git
 ```
+Git trae «Git Bash», que necesitan los motores de efectos y subtítulos de Converzzo.
 Después: «cierra Claude y vuelve a abrirlo» para que los vea. Si winget no existe, pídele que instale «Instalador de aplicaciones» desde Microsoft Store.
 
 ### Herramientas opcionales (instálalas si la persona va a usar ese nivel)
