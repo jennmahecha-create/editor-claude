@@ -36,6 +36,16 @@ El script imprime una tabla y, al final, una línea `JSON:` con el detalle. Lée
 
 Si todo está ✅, salta al paso 3.
 
+## Paso 1b · Elegir el perfil del computador
+```bash
+python3 "{SKILL}/scripts/diagnosticar.py"
+```
+Decide solo, sin preguntar, y explícalo en una línea:
+- **PRO** (16 GB de RAM o más y 25 GB libres): se instala todo.
+- **ESTÁNDAR** (8 a 16 GB o 15 a 25 GB libres): todo menos el seguimiento de objetos y el 3D, que en ese equipo irían lentos.
+- **LIGERO** (menos de 8 GB o de 15 GB libres): lo esencial, sin recortes de persona ni seguimiento.
+Así nadie se queda sin editar por un computador modesto. Si después quiere más: «instala los efectos avanzados» → `bash ~/.claude/mi-editor-pro/instalar_kit.sh --mejorar` (o, si no usó el kit, quita el perfil y repite este paso con `--forzar PRO`).
+
 ## Paso 2 · Instalar lo que falta (con permiso)
 
 Elige la ruta según `sistema` del JSON. Instala todo lo que falte en un solo bloque y en segundo plano si tarda (avisa: «esto tarda entre 5 y 20 minutos; puedes ir por un café»).
